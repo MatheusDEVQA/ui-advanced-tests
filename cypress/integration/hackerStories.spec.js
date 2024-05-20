@@ -100,7 +100,7 @@ describe('Hacker Stories', () => {
         .type(`${newTerm}{enter}`)
 
       cy.wait('@getNewtTermStories')
-      
+
 
       cy.get('.item').should('have.length', 20)
       cy.get('.item')
@@ -124,6 +124,17 @@ describe('Hacker Stories', () => {
         .should('contain', newTerm)
       cy.get(`button:contains(${initialTerm})`)
         .should('be.visible')
+    })
+
+    it('types and submits the form directly', () => {
+      //it's not E2E
+      cy.get('#search')
+        .type(newTerm)
+      cy.get('form').submit()
+
+      cy.wait('@getNewtTermStories')
+
+      cy.get('.item').should('have.length', 20)
     })
 
     context('Last searches', () => {
