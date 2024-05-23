@@ -1,0 +1,20 @@
+{
+  "hits": [
+    {
+      "title": "Title 1",
+      "url": "https://sitetest.com",
+      "author": "Author 1",
+      "points": 30,
+      "objectID": 0,
+      "num_comments": 23
+    },
+    {
+      "title": "Title 1",
+      "url": "https://sitetest.com",
+      "author": "Author 1",
+      "points": 88,
+      "objectID": 1,
+      "num_comments": 11
+    }
+  ]
+}

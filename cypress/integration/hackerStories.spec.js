@@ -63,47 +63,39 @@ describe('Hacker Stories', () => {
     })
   })
 
-  context('Mocking API', () =>{
-    
-  })
-  beforeEach(() => {
-    cy.intercept({
-      method: 'GET',
-      pathname: '**/search',
-      query: {
-        query: `${initialTerm}`,
-        page: '0'
-      }
-    }).as('getStories')
+  context('Mocking API', () => {
+    beforeEach(() => {
+      cy.intercept(
+        'GET',
+        `**/search?query=${initialTerm}&page=0`,
+        { fixture: 'stories' }
+      ).as('getStories')
 
-    cy.visit('/')
-    cy.wait('@getStories')
+      cy.visit('/')
+      cy.wait('@getStories')
+    })
 
+    it('shows the footer', () => {
+      cy.get('footer')
+        .should('be.visible')
+        .and('contain', 'Icons made by Freepik from www.flaticon.com')
+    })
 
-  })
+    context('List of stories', () => {
+      // Since the API is external,
+      // I can't control what it will provide to the frontend,
+      // and so, how can I assert on the data?
+      // This is why this test is being skipped.
+      // TODO: Find a way to test it out.
+      it.skip('shows the right data for all rendered stories', () => { })
 
-  it('shows the footer', () => {
-    cy.get('footer')
-      .should('be.visible')
-      .and('contain', 'Icons made by Freepik from www.flaticon.com')
-  })
+      it.only('shows only one stories after dimissing the first story', () => {
+        cy.get('.button-small')
+          .first()
+          .click()
 
-  context('List of stories', () => {
-    // Since the API is external,
-    // I can't control what it will provide to the frontend,
-    // and so, how can I assert on the data?
-    // This is why this test is being skipped.
-    // TODO: Find a way to test it out.
-    it.skip('shows the right data for all rendered stories', () => { })
-
-
-
-    it('shows only nineteen stories after dimissing the first story', () => {
-      cy.get('.button-small')
-        .first()
-        .click()
-
-      cy.get('.item').should('have.length', 19)
+        cy.get('.item').should('have.length', 1)
+      })
     })
 
     // Since the API is external,
@@ -197,7 +189,10 @@ describe('Hacker Stories', () => {
       })
     })
   })
+
 })
+
+
 
 context('Errors', () => {
   it('shows "Something went wrong ..." in case of a server error', () => {
