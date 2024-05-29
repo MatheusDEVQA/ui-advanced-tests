@@ -2,16 +2,16 @@
   "hits": [
     {
       "title": "Title 1",
-      "url": "https://sitetest.com",
+      "url": "https://sitetest1.com",
       "author": "Author 1",
       "points": 30,
-      "objectID": 0,
+      "objectID": 4,
       "num_comments": 23
     },
     {
-      "title": "Title 1",
-      "url": "https://sitetest.com",
-      "author": "Author 1",
+      "title": "Title 2",
+      "url": "https://sitetest2.com",
+      "author": "Author 2",
       "points": 88,
       "objectID": 1,
       "num_comments": 11
